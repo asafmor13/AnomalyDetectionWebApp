@@ -1,78 +1,74 @@
 const joi = require('joi');
+const Datastore = require('nedb')
 const express = require('express')
 const app = express()
 const port = 9876;
 
 app.use(express.json());
-const modles = [
-    {
-        model_id: 1,
-        upload_time : "YYYY-MM-DDTHH:mm:ssZ",
-        status: "ready"
-    }
-];
+const database = new Datastore('modeldb.db');
+database.loadDatabase();
+var modellength = 0;
 
-app.get('/', (req,res) => {
-    res.status(200).json({
-        message: 'hellof world'
-    })
-});
+
 
 app.get('/api/models', (req,res) => {
-    // res.status(200).json({
-    //     message: 'd world'
-    // })
-    res.send(modles);
+    database.find({}, (err, data) => {
+    res.json(data);
+    });
 });
 
 app.get('/api/model', (req,res) => {
-    let model = modles.find(m => m.model_id === parseInt(req.query.model_id));
-    if (!model)
-        return res.status(404).send('not found');
-    res.send(model.status);
-});
-app.get('/api/model/:id', (req,res) => {
 
-    let model = modles.find(m => m.model_id === parseInt(req.params.id));
-    if (!model)
-        return res.status(404).send('not found');
-     res.send(model);
+    database.findOne({ model_id: parseInt(req.query.model_id) }, function (err, doc) {
+        if(!doc)
+            return res.status(404).send('not found');
+        res.json(doc);
+    });
+});
+
+app.get('/api/model/:id', (req,res) => {
+    database.findOne({ model_id: parseInt(req.params.id) }, function (err, doc) {
+        if(!doc)
+            return res.status(404).send('not found');
+        res.json(doc.status);
+    });
 });
 
 app.post('/api/model', (req, res) => {
-    // if(!req.body.name){
-    //     res.status(400).send("no");
-    // }
-    
-    const model = {
-        model_id : modles.length + 1,
-        upload_time: new Date().toJSON(),
+     if(!req.query.model_type){
+        res.status(400).send("no");
+    }
 
-        status : "ready",
+    const model = {
+        model_id : modellength + 1,
+        model_type : req.query.model_type,
+        upload_time: new Date().toJSON(),
+        status : "pending",
     };
-    modles.push(model);
-    res.send(model);
+
+     modellength++;
+     database.insert(model);
+     res.json(model);
 
 });
+
 app.post('/api/anomaly', (req, res) => {
 
-    let m_id = req.query.model_id;
-    console.log(m_id);
-
-    const model = {
-        model_id : modles.length + 1,
-        upload_time: new Date().toJSON(),
-
-        status : "ready",
-    };
-    modles.push(model);
-    res.send(model);
+    database.findOne({ model_id: parseInt(req.query.model_id) }, function (err, doc) {
+        if(!doc)
+            return res.status(404).send('not found');
+        if(doc.status == "pending")
+        res.json(doc.status);
+    });
 
 });
 
 
 
-app.delete('/api/model/:id', (req, res) => {
- // implement later
-});
+app.delete('/api/model', (req, res) => {
+    database.remove({ model_id: parseInt(req.query.model_id)}, {}, function (err, numRemoved) {
+        // numRemoved = 1
+        res.json(numRemoved);
+    });});
+
 app.listen(port, () => console.log('listening on port 9876'));
