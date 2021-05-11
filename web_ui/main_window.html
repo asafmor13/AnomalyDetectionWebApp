@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Vanilla Bootstrap v4.2.1 Theme</title>
+    <title>anomaly detection</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -24,9 +24,8 @@
     <ul class="nav flex-column">
         <li class="nav-item"><a class="nav-link" href="#home"><span>item1</span></a></li>
         <li class="nav-item"><a class="nav-link" href="#services"><span>item2</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="#portfolio"><span>item3</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="#our-story"><span>item4</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact-us"><span>item5</span></a></li>
+        <li class="nav-item"><a class="nav-link" ref="#our-story"><span>item3</span></a></li>
+        <li class="nav-item"><a class="nav-link"  href="#contact-us"><span>item4</span></a></li>
     </ul>
 </div>
 
@@ -36,153 +35,61 @@
             <h1>web app</h1>
             <span><em>Haim group</em> 2 milestone</span>
             <div class="primary-button">
-                <a href="#services">Enter your csv now!</a>
+                <a href="#services" >Enter your csv now!</a>
             </div>
         </div>
     </div>
 </div>
-
 <div class="service-content" id="services">
-    <div class="container">
-        <div class="row">
-            <table align="center">
-                <tr style="height: auto">
-                    <td align="center" style="width: auto">
-                        <div class="service-item">
-                            <h4>Enter your csv file!</h4>
-                            <div class="line-dec"></div>
+<table align="center"> <tr> <td>
 
-                            <div class="drop-zone">
-                                <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                                <input type="file" name="myFile" class="drop-zone__input">
-                            </div>
+        <div class="container">
+            <div class="row" align="center">
+                <div class="service-item" align="center">
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <form>
+                                    <label for="detectors">Choose detector:</label></td>
+                            <td>
+                                    <select id="detectors" name="detections">
+                                        <option value="regression">regression</option>
+                                        <option value="hybrid">hybrid</option>
+                                    </select>
+                                </form>
+                            </td>
+                        </tr>
 
-                            <script src="./js/main_window.js"></script>
+                        <tr>  <h4 align="center">Enter your csv files!</h4>
+                            <div class="line-dec" align="center"></div>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="drop-zone" style="width: 200px" >
+                                    <span class="drop-zone__prompt">Drop learn csv file here or click to upload</span>
+                                    <input type="file" name="myFile" class="drop-zone__input">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="drop-zone" style="width: 200px">
+                                    <span class="drop-zone__prompt">Drop detect csv file here or click to upload</span>
+                                    <input type="file" name="myFile" class="drop-zone__input">
+                                </div>
+                            </td>
+                        </tr>
 
-                            <div class="line-dec"></div>
-                            <div class="primary-button"  id="applyButton" onclick="applyFile()">
-                                <a href="#services">apply</a>
-
-                            </div>
-
-                        </div>
-                    </td>
-                </tr>
-            </table>
-
-        </div>
-    </div>
-</div>
-
-
-<div class="parallax-content projects-content" id="portfolio">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div id="owl-testimonials" class="owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="testimonials-item">
-                            <a href="img/pending.jpg" data-lightbox="image-1"><img src="img/pending.jpg" alt=""></a>
-                            <div class="text-content">
-                                <h4>model1</h4>
-                                <span>active/not active</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimonials-item">
-                            <a href="img/notAvailable.jfif" data-lightbox="image-1"><img src="img/notAvailable.jfif" alt=""></a>
-                            <div class="text-content">
-                                <h4>model2</h4>
-                                <span>active/not active</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimonials-item">
-                            <a href="img/ready.jpg" data-lightbox="image-1"><img src="img/ready.jpg" height="300" width="600" alt=""></a>
-                            <div class="text-content">
-                                <h4>model3</h4>
-                                <span>active/not active</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimonials-item">
-                            <a href="img/4th-big-item.jpg" data-lightbox="image-1"><img src="img/4th-item.jpg" alt=""></a>
-                            <div class="text-content">
-                                <h4>Smart Watch</h4>
-                                <span>$45.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimonials-item">
-                            <a href="img/5th-big-item.jpg" data-lightbox="image-1"><img src="img/5th-item.jpg" alt=""></a>
-                            <div class="text-content">
-                                <h4>PC Tablet Draw</h4>
-                                <span>$63.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimonials-item">
-                            <a href="img/6th-big-item.jpg" data-lightbox="image-1"><img src="img/6th-item.jpg" alt=""></a>
-                            <div class="text-content">
-                                <h4>Healthy Milkshake</h4>
-                                <span>$77.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimonials-item">
-                            <a href="img/2nd-big-item.jpg" data-lightbox="image-1"><img src="img/2nd-item.jpg" alt=""></a>
-                            <div class="text-content">
-                                <h4>Antique Decoration Photo</h4>
-                                <span>$84.50</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimonials-item">
-                            <a href="img/1st-big-item.jpg" data-lightbox="image-1"><img src="img/1st-item.jpg" alt=""></a>
-                            <div class="text-content">
-                                <h4>Awesome Notes Book</h4>
-                                <span>$96.75</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimonials-item">
-                            <a href="img/1st-big-item.jpg" data-lightbox="image-1"><img src="img/1st-item.jpg" alt=""></a>
-                            <div class="text-content">
-                                <h4>Awesome Notes Book</h4>
-                                <span>$96.75</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimonials-item">
-                            <a href="img/1st-big-item.jpg" data-lightbox="image-1"><img src="img/1st-item.jpg" alt=""></a>
-                            <div class="text-content">
-                                <h4>Awesome Notes Book</h4>
-                                <span>$96.75</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="testimonials-item">
-                            <a href="img/1st-big-item.jpg" data-lightbox="image-1"><img src="img/1st-item.jpg" alt=""></a>
-                            <div class="text-content">
-                                <h4>Awesome Notes Book</h4>
-                                <span>$96.75</span>
-                            </div>
-                        </div>
+                        <script src="./js/main_window.js"></script>
+                    </table>
+                    <div class="line-dec" align="center"></div>
+                    <div class="primary-button" align="center" id="applyButton" onclick="applyFile()" >
+                        <a href="#services">apply</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+
+</td> </tr> </table>
 </div>
 
 
@@ -194,26 +101,11 @@
                     <section id="first-tab-group" class="tabgroup">
                         <div id="tab1">
                             <img src="img/1st-tab.jpg" alt="">
-                            <p>Please do not re-distribute our template ZIP file on your template collection sites. You can make a screenshot and a link back to our website. This template can be used for personal or commercial purposes by end-users.</p>
-                        </div>
-                        <div id="tab2">
-                            <img src="img/2nd-tab.jpg" alt="">
-                            <p>Aliquam eu ultrices risus, sed condimentum diam. Duis risus nulla, elementum vitae nisi a, ornare maximus nisl. Morbi et vehicula est. Cras at vulputate justo. Cras eu nulla metus. Ut et pretium velit. Pellentesque at neque tristique dui tempor venenatis.</p>
-                        </div>
-                        <div id="tab3">
-                            <img src="img/3rd-tab.jpg" alt="">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia ligula est, at venenatis ex iaculis quis. Morbi sollicitudin nulla eget odio pellentesque, sed cursus diam iaculis.</p>
-                        </div>
-                        <div id="tab4">
-                            <img src="img/4th-tab.jpg" alt="">
-                            <p>Duis risus nulla, elementum vitae nisi a, ornare maximus nisl. Morbi et vehicula est. Cras at vulputate justo. Cras eu nulla metus. Ut et pretium velit. Pellentesque at neque tristique.</p>
+                            <p>blablabla some text, maybe explain res</p>
                         </div>
                     </section>
                     <ul class="tabs clearfix" data-tabgroup="first-tab-group">
-                        <li><a href="#tab1" class="active">2008 - 2014</a></li>
-                        <li><a href="#tab2">2014 - 2016</a></li>
-                        <li><a href="#tab3">2016 - 2019</a></li>
-                        <li><a href="#tab4">2019 - Now</a></li>
+                        <li><a href="#tab1" class="active">the results</a></li>
                     </ul>
                 </div>
             </div>
