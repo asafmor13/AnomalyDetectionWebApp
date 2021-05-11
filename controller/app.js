@@ -1,88 +1,24 @@
-const joi = require('joi');
-const Datastore = require('nedb')
 const express = require('express')
+const fs = require ('fs')
+const fileUpload = require('express-fileupload')
+//const model ...
 const app = express()
-const port = 9876;
-
+app.use(express.static("./web_ui"))
+app.use(fileUpload())
 app.use(express.json());
-const database = new Datastore('modeldb.db');
-database.loadDatabase();
-var modellength = 0;
+const port = 8080;
 
-function replacer(key, value) {
-    // Filtering out properties
-    if (typeof value === 'string') {
-        return undefined;
-    }
-    return value;
-}
+app.get("/", (req,res)=> {
+    //res.sendFile(__dirname + "/" + "style.css");
+   // res.sendFile('./index.html', { root: './web_ui' });
+    res.sendFile('./main_window.html', { root: './web_ui' });
+})
 
-
-app.get('/api/models', (req,res) => {
-    database.find({}, (err, data) => {
-        // data.forEach(function (d){
-        //     console.log('Saved user:', d.name);
-        // });
-  //     var v = JSON.stringify(data,replacer);
-   //     res.json(v);
-     //   data.remove()
-        JSON.stringify(data);
-    res.json(data);
-    });
-});
-
-app.get('/api/model', (req,res) => {
-
-    database.findOne({ model_id: parseInt(req.query.model_id) }, function (err, doc) {
-        if(!doc)
-            return res.status(404).send('not found');
-        res.json(doc);
-    });
-});
-
-app.get('/api/model/:id', (req,res) => {
-    database.findOne({ model_id: parseInt(req.params.id) }, function (err, doc) {
-        if(!doc)
-            return res.status(404).send('not found');
-        res.json(doc.status);
-    });
-});
-
-app.post('/api/model', (req, res) => {
-     if(!req.query.model_type){
-        res.status(400).send("no");
-    }
-
-    const model = {
-        model_id : modellength + 1,
-        model_type : req.query.model_type,
-        upload_time: new Date().toJSON(),
-        status : "pending",
-    };
-
-     modellength++;
-     database.insert(model);
-     res.json(model);
-
-});
-
-app.post('/api/anomaly', (req, res) => {
-
-    database.findOne({ model_id: parseInt(req.query.model_id) }, function (err, doc) {
-        if(!doc)
-            return res.status(404).send('not found');
-        if(doc.status == "pending")
-        res.json(doc.status);
-    });
-
+app.post('/detect', (req,res) => {
+//  if (req.files)
+    console.log(req.body.files);
+    res.send("G")
 });
 
 
-
-app.delete('/api/model', (req, res) => {
-    database.remove({ model_id: parseInt(req.query.model_id)}, {}, function (err, numRemoved) {
-        // numRemoved = 1
-        res.json(numRemoved);
-    });});
-
-app.listen(port, () => console.log('listening on port 9876'));
+app.listen(port, () => console.log('listening on port 8080'));
