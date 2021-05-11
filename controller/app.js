@@ -1,7 +1,6 @@
 const express = require('express')
 const fs = require ('fs')
 const fileUpload = require('express-fileupload')
-//const model ...
 const app = express()
 app.use(express.static("./web_ui"))
 app.use(fileUpload())
@@ -15,9 +14,14 @@ app.get("/", (req,res)=> {
 })
 
 app.post('/detect', (req,res) => {
-//  if (req.files)
-    console.log(req.body.files);
-    res.send("G")
+    if(!req.query.model_type){
+        res.status(400).send("no");
+    }
+    if(req.query.model_type == "hybrid")
+        res.send("o")
+    if(req.query.model_type == "regression")
+        res.send("3o")
+
 });
 
 
