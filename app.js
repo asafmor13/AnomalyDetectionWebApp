@@ -9,10 +9,24 @@ const database = new Datastore('modeldb.db');
 database.loadDatabase();
 var modellength = 0;
 
+function replacer(key, value) {
+    // Filtering out properties
+    if (typeof value === 'string') {
+        return undefined;
+    }
+    return value;
+}
 
 
 app.get('/api/models', (req,res) => {
     database.find({}, (err, data) => {
+        // data.forEach(function (d){
+        //     console.log('Saved user:', d.name);
+        // });
+  //     var v = JSON.stringify(data,replacer);
+   //     res.json(v);
+     //   data.remove()
+        JSON.stringify(data);
     res.json(data);
     });
 });
