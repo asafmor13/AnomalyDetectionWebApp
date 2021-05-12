@@ -74,16 +74,21 @@ function updateThumbnail(dropZoneElement, file) {
     reader.onload = () => {
         if (file.name.endsWith(".csv")) {
             thumbnailElement.dataset.label = file.name;
-            thumbnailElement.style.backgroundImage = "url(../web_ui/img/csv.jpg)";
+            thumbnailElement.style.backgroundImage = "url(/img/csv.jpg)";
         } else {
             thumbnailElement.dataset.label = "unsupported file type";
-            thumbnailElement.style.backgroundImage = "url(../web_ui/img/x.png)";
+            thumbnailElement.style.backgroundImage = "url(/img/x.png)";
         }
     };
 }
 
+function setForm() {
+    setAction();
+    console.log(document.getElementById("Form").action)
+    return validityCheck();
+}
+
 function validityCheck() {
-    window.alert("hello!");
 
     if (learnFile!=undefined && learnFile.name.endsWith(".csv") &&
         detectionFile!=undefined && detectionFile.name.endsWith(".csv"))
@@ -95,12 +100,12 @@ function validityCheck() {
     return false;
 }
 
-function queryField() {
-    var choice=document.getElementsByName("detections");
-    document.getElementsByName("myForm").action = "/api/detect?model_type="
-        +choise.value;
-    return true;
+function setAction() {
+    let choice=document.getElementById("detectors").value;
+    document.getElementById("Form").action=document.getElementById("Form").action + choice;
+    window.alert(document.getElementById("Form").action);
 }
+
 
 
 
