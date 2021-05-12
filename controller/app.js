@@ -1,30 +1,50 @@
 const express = require('express')
 const fs = require ('fs')
 const fileUpload = require('express-fileupload')
+const bodyParser = require('body-parser');
 const app = express()
-//app.use(express.static("./web_ui"))
-app.use(fileUpload())
-app.use(express.json());
+
+app.use(fileUpload());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 const port = 8080;
 
+
  app.get("/", (req,res)=> {
-    res.sendFile('./main_window.html', { root: './web_ui' });
+    //res.sendFile('./main_window.html', { root: './web_ui' });
+     res.sendFile('asa.html', { root: __dirname });
+});
 
-})
-
-app.post('/detect', (req,res) => {
+app.post('/api/detect', (req,res) => {
     if(!req.query.model_type){
-        res.status(400).send("no");
+        res.status(400).send("no")
     }
-    var file;
+    let model_type = req.query.model_type;
+    if (model_type !== "regression" && model_type !== "hybrid") {
+        res.status(400).send("no")
+    }
+    if(req.files)
+        console.log(req.files)
+    let model = req.files.model;
+    let anomaly = req.files.anomaly;
 
+    model.mv('./model.csv', function (err) {
+        if (err) {
+            res.send(err)
+        }
+        // else {
+        //     res.send("file uploaded")
+        // }
+    })
 
-    file = req.files.FormFieldName;
-    if(req.query.model_type == "hybrid")
-        res.send("o")
-    if(req.query.model_type == "regression")
-        res.send("3o")
-
+    anomaly.mv('./anomaly.csv', function (err) {
+        if (err) {
+            res.send(err)
+        } else {
+            res.send("file uploaded")
+        }
+    })
+   // res.end();
 });
 
 
