@@ -11,8 +11,8 @@ const port = 8080;
 
 
  app.get("/", (req,res)=> {
-    //res.sendFile('./main_window.html', { root: './web_ui' });
-     res.sendFile('asa.html', { root: __dirname });
+    res.sendFile('./main_window.html', { root: './web_ui' });
+    // res.sendFile('asa.html', { root: __dirname });
 });
 
 app.post('/api/detect', (req,res) => {

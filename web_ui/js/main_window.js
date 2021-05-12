@@ -95,5 +95,12 @@ function validityCheck() {
     return false;
 }
 
+function queryField() {
+    var choice=document.getElementsByName("detections");
+    document.getElementsByName("myForm").action = "/api/detect?model_type="
+        +choise.value;
+    return true;
+}
+
 
 
