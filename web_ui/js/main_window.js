@@ -102,7 +102,7 @@ function validityCheck() {
 
 function setAction() {
     let choice=document.getElementById("detectors").value;
-    document.getElementById("Form").action=document.getElementById("Form").action + choice;
+    document.getElementById("Form").action="/api/detect?model_type=" + choice;
     window.alert(document.getElementById("Form").action);
 }
 
