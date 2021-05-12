@@ -1,4 +1,6 @@
-var path;
+var learnFile;
+var detectionFile;
+var choise;
 document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
     const dropZoneElement = inputElement.closest(".drop-zone");
 
@@ -44,6 +46,11 @@ document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
  */
 
 function updateThumbnail(dropZoneElement, file) {
+    if (dropZoneElement.id == "learnFile") {
+        learnFile = file;
+    } else {
+        detectionFile = file;
+    }
     let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
 
     // First time - remove the prompt
@@ -65,7 +72,6 @@ function updateThumbnail(dropZoneElement, file) {
     thumbnailElement.style.height="250px";
 
     reader.onload = () => {
-        path = file
         if (file.name.endsWith(".csv")) {
             thumbnailElement.dataset.label = file.name;
             thumbnailElement.style.backgroundImage = "url(../web_ui/img/csv.jpg)";
@@ -77,27 +83,17 @@ function updateThumbnail(dropZoneElement, file) {
 }
 
 function validityCheck() {
-    if (path.name.endsWith(".csv")) {
-        return true;
-    }
+    window.alert("hello!");
+
+    if (learnFile!=undefined && learnFile.name.endsWith(".csv") &&
+        detectionFile!=undefined && detectionFile.name.endsWith(".csv"))
+        {
+            window.alert("valid files");
+            return true;
+        }
+    window.alert("invalid file");
     return false;
 }
 
-function applyFile() {
-    if (validityCheck()) {
-        const reader = new FileReader();
-        reader.addEventListener('load', (event) => {
-            const result = event.target.result;
-        });
 
-        reader.addEventListener('progress', (event) => {
-            if (event.loaded && event.total) {
-                const percent = (event.loaded / event.total) * 100;
-            }
-        });
-        reader.readAsDataURL(file);
-    }
-    else {
-        window.alert("the specfied file does not match");
-    }
-}
+
