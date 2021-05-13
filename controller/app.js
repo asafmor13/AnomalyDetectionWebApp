@@ -12,6 +12,12 @@ const port = 8080;
 app.use(express.urlencoded({
     extended: false
 }))
+app.use((_, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', '*');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    next();
+});
 app.use(express.static("./web_ui"));
 
  app.get("/", (req,res)=> {
@@ -30,25 +36,26 @@ app.post('/api/detect', (req,res) => {
     if (model_type !== "regression" && model_type !== "hybrid") {
         res.status(400).send("unsupported model type")
     }
+    console.log(req.files)
     let model = req.files.model;
     let anomaly = req.files.anomaly;
 
-    model.mv('./model.csv', function (err) {
-        if (err) {
-            res.send(err)
-        }
-        // else {
-        //     res.send("file uploaded")
-        // }
-    })
-
-    anomaly.mv('./anomaly.csv', function (err) {
-        if (err) {
-            res.send(err)
-        } else {
-            res.send("file uploaded")
-        }
-    })
+    // model.mv('./model.csv', function (err) {
+    //     if (err) {
+    //         res.send(err)
+    //     }
+    //     // else {
+    //     //     res.send("file uploaded")
+    //     // }
+    // })
+    //
+    // anomaly.mv('./anomaly.csv', function (err) {
+    //     if (err) {
+    //         res.send(err)
+    //     } else {
+    //         res.send("file uploaded")
+    //     }
+    // })
    // res.end();
 });
 
