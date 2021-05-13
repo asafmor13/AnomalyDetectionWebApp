@@ -105,5 +105,3 @@ class SimpleAnomalyDetector {
         return this.cf;
     }
 }
-
-moudle.exports
