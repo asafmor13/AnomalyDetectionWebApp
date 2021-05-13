@@ -1,6 +1,5 @@
 var learnFile;
 var detectionFile;
-var choise;
 document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
     const dropZoneElement = inputElement.closest(".drop-zone");
 
@@ -66,8 +65,8 @@ function updateThumbnail(dropZoneElement, file) {
     }
 
     const reader = new FileReader();
-
     reader.readAsDataURL(file);
+
     thumbnailElement.style.width="200px";
     thumbnailElement.style.height="250px";
 
@@ -83,29 +82,30 @@ function updateThumbnail(dropZoneElement, file) {
 }
 
 function setForm() {
+
+    setFiles();
     setAction();
-    console.log(document.getElementById("Form").action)
     return validityCheck();
+
+}
+
+function setFiles() {
+    //document.getElementById("learn").input=learnFile;
+    //document.getElementById("detect").input=detectionFile;
 }
 
 function validityCheck() {
-
     if (learnFile!=undefined && learnFile.name.endsWith(".csv") &&
         detectionFile!=undefined && detectionFile.name.endsWith(".csv"))
         {
-            window.alert("valid files");
             return true;
         }
-    window.alert("invalid file");
     return false;
 }
 
 function setAction() {
     let choice=document.getElementById("detectors").value;
     document.getElementById("Form").action="/api/detect?model_type=" + choice;
-    window.alert(document.getElementById("Form").action);
 }
-
-
 
 

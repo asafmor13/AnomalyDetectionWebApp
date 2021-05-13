@@ -3,7 +3,6 @@ const fs = require ('fs')
 const fileUpload = require('express-fileupload')
 const bodyParser = require('body-parser');
 const app = express()
-app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 const port = 8080;
@@ -14,8 +13,7 @@ app.use(express.urlencoded({
 app.use(express.static("web_ui"));
 
 app.get("/", (req,res)=> {
-    res.sendFile('./index.html', { root: './web_ui' });
-    // res.sendFile('asa.html', { root: __dirname });
+    res.sendFile('./asa.html', { root: './web_ui' });
 });
 
 app.post('/api/detect', (req,res) => {
@@ -27,11 +25,13 @@ app.post('/api/detect', (req,res) => {
         res.status(400).send("unsupported model type")
     }
 
-    if(req.files)
-        console.log(req.files);
+    if(!req.files) {
+        console.log("no files");
+    }
+    console.log("files");
 
-    let model = req.files.model;
-    let anomaly = req.files.anomaly;
+    let model = req.learnFile;
+    let anomaly = req.detectFile;
 
     model.mv('./model.csv', function (err) {
         if (err) {
@@ -54,3 +54,4 @@ app.post('/api/detect', (req,res) => {
 
 
 app.listen(port, () => console.log('listening on port 8080'));
+
