@@ -21,42 +21,47 @@ app.use((_, res, next) => {
 app.use(express.static("./web_ui"));
 
  app.get("/", (req,res)=> {
-   // res.sendFile('/main_window.html', { root: './web_ui' });
-     res.sendFile('./main_window.html')
-    // res.sendFile(path.join('.' + 'web_ui' + '/main_window.html'));
-
-     //  res.sendFile('asa.html', { root: __dirname });
+     res.sendFile('./index.html')
 });
 
 app.post('/api/detect', (req,res) => {
+
     if(!req.query.model_type){
         res.status(400).send("missing model type")
+        console.log("here error on !model_type")
+        return
     }
     let model_type = req.query.model_type;
     if (model_type !== "regression" && model_type !== "hybrid") {
         res.status(400).send("unsupported model type")
+        console.log("here error on un supported model_type")
+        return
     }
-    console.log(req.files)
+    console.log(req.body)
     let model = req.files.model;
     let anomaly = req.files.anomaly;
 
-    // model.mv('./model.csv', function (err) {
-    //     if (err) {
-    //         res.send(err)
-    //     }
-    //     // else {
-    //     //     res.send("file uploaded")
-    //     // }
-    // })
-    //
-    // anomaly.mv('./anomaly.csv', function (err) {
-    //     if (err) {
-    //         res.send(err)
-    //     } else {
-    //         res.send("file uploaded")
-    //     }
-    // })
-   // res.end();
+
+    model.mv('./model.csv', function (err) {
+         if (err) {
+             res.send(err)
+             console.log("here error on modelcsv")
+         }
+     })
+
+
+    anomaly.mv('./anomaly.csv', function (err) {
+         if (err) {
+             res.send(err)
+             console.log("problem1")
+
+         } else {
+             //console.log("problem2")
+             //res.send("file uploaded")
+         }
+        console.log("manage to finish")
+    })
+    res.end();
 });
 
 

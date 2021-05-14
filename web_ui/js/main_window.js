@@ -35,6 +35,11 @@ document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
 
         dropZoneElement.classList.remove("drop-zone--over");
     });
+
+    detect.addEventListener("change", event => {
+        const files = event.target.files;
+        uploadFile(files);
+    });
 });
 
 /**
@@ -86,12 +91,12 @@ function setForm() {
     setFiles();
     setAction();
     return validityCheck();
-
 }
 
 function setFiles() {
-    //document.getElementById("learn").input=learnFile;
-    //document.getElementById("detect").input=detectionFile;
+
+    document.getElementById("learn").input=learnFile;
+    document.getElementById("detect").input=detectionFile;
 }
 
 function validityCheck() {
@@ -106,6 +111,8 @@ function validityCheck() {
 function setAction() {
     let choice=document.getElementById("detectors").value;
     document.getElementById("Form").action="/api/detect?model_type=" + choice;
+
 }
+
 
 

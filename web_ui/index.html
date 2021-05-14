@@ -42,7 +42,7 @@
 </div>
 <div class="service-content" id="services">
     <form name="myForm" action="/api/detect?model_type=" onsubmit="return setForm()" method="POST" id="Form"
-    enctype=multipart/form-data">
+    enctype="multipart/form-data">
 
     <table align="center"> <tr> <td>
         <div class="container">
@@ -57,13 +57,13 @@
                             <td>
                                 <div class="drop-zone" style="width: 200px" name="learnFile" id="learnFile">
                                     <span class="drop-zone__prompt">Drop learn csv file here or click to upload</span>
-                                    <input type="file" name="learnFile" id="learn" class="drop-zone__input">
+                                    <input type="file" name="model" id="learn" class="drop-zone__input">
                                 </div>
                             </td>
                             <td>
                                 <div class="drop-zone" style="width: 200px" name="detectFile" id="detectionFile">
                                     <span class="drop-zone__prompt">Drop detect csv file here or click to upload</span>
-                                    <input type="file" name="detectFile" id="detect" class="drop-zone__input">
+                                    <input type="file" name="anomaly" id="detect" class="drop-zone__input">
                                 </div>
                             </td>
                         </tr>
