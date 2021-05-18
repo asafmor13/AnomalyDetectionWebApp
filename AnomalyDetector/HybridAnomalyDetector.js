@@ -1,24 +1,26 @@
+const SimpleAnomalyDetector = require("/SimpleAnomalyDetector");
+const enclosingCircle = require('smallest-enclosing-circle');
+
 class HybridAnomalyDetector {
         constructor(threshold) {
 
         }
 
        cirCorr(cf, points = [], size) {
-            //let minCircle = new Circle(new Point(0, 0), 0);
-            //let circle = minCircle.findMinCircle(points, size);
-            cf.centerX =  circle.center.x;
-            cf.centerY = circle.center.y;
-            cf.rad = circle.radius;
+           let circle = enclosingCircle([points]);
+            cf.centerX =  circle["x"];
+            cf.centerY = circle["y"];
+            cf.rad = circle["r"];
             cf.threshold = cf.rad * 1.1;
             cf.isCircle = true;
-            this.cf.add(cf);
+            cf.add(cf);
         }
 
         isAnomalous(cf, point) {
 
             if (!cf.isCircle)
             {
-                return isAnomalous(cf, point);
+                return this.isAnomalous(cf, point);
             }
 
             else
