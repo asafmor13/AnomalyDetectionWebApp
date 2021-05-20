@@ -1,5 +1,8 @@
 //Point class.
 class Point {
+    x;
+    y;
+
     constructor(x, y) {
         this.x = x;
         this.y = y;
@@ -8,6 +11,8 @@ class Point {
 
 //line class.
 class Line {
+    a;
+    b;
     constructor(aa, bb) {
         this.a = aa;
         this.b = bb;
@@ -55,8 +60,6 @@ class Utils {
 
     //linear regression.
     linear_reg(x =[], y = [], size) {
-        //console.log(points);
-        console.log(this.variance(x,size));
         if(!this.variance(x,size)) {
             return new Line(0,0);
         }

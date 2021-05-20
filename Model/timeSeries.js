@@ -7,7 +7,7 @@ class TimeSeries {
     table;
 
     constructor(filepath) {
-        this.filepath = filepath;
+        this.filepath = filepath
         this.colNames = [];
         this.table = new Map();
         this.createTable();
@@ -28,7 +28,8 @@ class TimeSeries {
     createTable() {
         //parsing the data into rows, using eol as delimiter.
         //let rows = this.filepath.split(os.EOL).slice(0,-1);
-        let rows = this.filepath.split('\n').slice(0,-1);
+
+        let rows = this.filepath.split(os.EOL).slice(0,-1);
 
 
         //fill the colNames with values according to the first line(agreed convention).
@@ -60,5 +61,5 @@ class TimeSeries {
 
 }
 
-exports.TimeSeries = TimeSeries;
+module.exports.TimeSeries = TimeSeries;
 

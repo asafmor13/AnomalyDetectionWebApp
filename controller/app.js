@@ -4,6 +4,7 @@ const fileUpload = require('express-fileupload')
 const bodyParser = require('body-parser');
 const app = express()
 const path = require('path');
+const detector = require('../Model/MainModel');
 
 app.use(fileUpload());
 app.use(bodyParser.json());
@@ -18,10 +19,10 @@ app.use((_, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', '*');
     next();
 });
-app.use(express.static("./web_ui"));
+//app.use(express.static());
 
  app.get("/", (req,res)=> {
-     res.sendFile('./index.html')
+     res.sendFile('./asa.html', {root: __dirname});
 });
 
 app.post('/api/detect', (req,res) => {
@@ -37,30 +38,22 @@ app.post('/api/detect', (req,res) => {
         console.log("here error on un supported model_type")
         return
     }
-    console.log(req.body)
+
+    //extract the files data.
     let model = req.files.model;
     let anomaly = req.files.anomaly;
 
+    //convert them to strings.
+    let learnFile = model.data.toString();
+    let anomalyFile = anomaly.data.toString();
 
-    model.mv('./model.csv', function (err) {
-         if (err) {
-             res.send(err)
-             console.log("here error on modelcsv")
-         }
-     })
-
-
-    anomaly.mv('./anomaly.csv', function (err) {
-         if (err) {
-             res.send(err)
-             console.log("problem1")
-
-         } else {
-             //console.log("problem2")
-             //res.send("file uploaded")
-         }
-        console.log("manage to finish")
-    })
+    //if the post request if for regression,return the anomaly reports as JSON.
+    if(model_type === 'regression') {
+        return JSON.stringify(detector.simpleActivator(learnFile, anomalyFile));
+    //if its for hybrid.
+    } else if(model_type === 'hybrid') {
+       return JSON.stringify(detector.hybridActivator(learnFile, anomalyFile));
+    }
     res.end();
 });
 

@@ -3,7 +3,7 @@
  * Contain timeStep and description.
  */
 class AnomalyReport {
-    constructor(timeStep, description) {
+    constructor(description, timeStep) {
         this.timeStep = timeStep;
         this.description = description;
     }

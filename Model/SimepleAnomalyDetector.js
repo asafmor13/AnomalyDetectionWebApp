@@ -34,7 +34,7 @@ class SimpleAnomalyDetector {
 
     //if the correlation is above the threshold, update and add a corrFeature.
     learnHelper(table, maxCore,feature1, fMostCore, size) {
-        if(maxCore > this.threshold) {
+        if (maxCore > this.threshold) {
             let cfs = new corrFeatures.CorrelatedFeatures();
             cfs.feature1 = feature1;
             cfs.feature2 = fMostCore;
@@ -44,6 +44,7 @@ class SimpleAnomalyDetector {
             this.cf.push(cfs);
         }
     }
+
 
 
     //Learn the Train file.
@@ -66,7 +67,6 @@ class SimpleAnomalyDetector {
             }
             let maxCore = 0
             let maxIndex = 0;
-
 
             for(let j = i + 1; j < size; j++) {
                 let feature2 = colNames[j];
