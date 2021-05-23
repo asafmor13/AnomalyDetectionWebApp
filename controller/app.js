@@ -21,10 +21,10 @@ app.use((_, res, next) => {
     next();
 });
 //app.use(express.static());
-//app.use(express.static("./web_ui"));
+app.use(express.static("./web_ui"));
  app.get("/", (req,res)=> {
      //     res.sendFile('./asa.html', {root: __dirname});
-     res.sendFile('./main_window.html', {root: '../web_ui'});
+     res.sendFile('./main_window.html');
 });
 
 app.post('/api/detect', (req,res) => {
