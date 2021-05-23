@@ -29,7 +29,7 @@ class TimeSeries {
         //parsing the data into rows, using eol as delimiter.
         //let rows = this.filepath.split(os.EOL).slice(0,-1);
 
-        let rows = this.filepath.split(os.EOL).slice(0,-1);
+        let rows = this.filepath.split('\n').slice(0,-1);
 
 
         //fill the colNames with values according to the first line(agreed convention).

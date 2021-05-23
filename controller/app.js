@@ -13,6 +13,7 @@ const port = 8080;
 app.use(express.urlencoded({
     extended: false
 }))
+
 app.use((_, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', '*');
@@ -20,9 +21,10 @@ app.use((_, res, next) => {
     next();
 });
 //app.use(express.static());
-
+//app.use(express.static("./web_ui"));
  app.get("/", (req,res)=> {
-     res.sendFile('./asa.html', {root: __dirname});
+     //     res.sendFile('./asa.html', {root: __dirname});
+     res.sendFile('./main_window.html', {root: '../web_ui'});
 });
 
 app.post('/api/detect', (req,res) => {
