@@ -1,6 +1,6 @@
 var learnFile;
 var detectionFile;
-var firstTime;
+var Data;
 document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
     const dropZoneElement = inputElement.closest(".drop-zone");
 
@@ -130,7 +130,47 @@ function setAction() {
     // document.getElementById("Form").action=action
     return action
 }
+ function nextComma(string){
+    window.alert("here");
+    let size = string.length;
+    let firstTime = 0;
+    let i = 0;
+    for (; i < size ; i++) {
+        if (string[i] == ',') {
+            if (firstTime === 1) {
+                return i;
+            } else {
+                firstTime = 1;
+            }
+        }
+    }
+    return -1;
+}
 
+function setUpResView() {
+    //window.scroll(0, 1200);
+
+    var map = new Map();
+    var endIndex =nextComma(Data);
+    var startIndex = 1;
+    while (endIndex != -1) {
+        var curr = Data.slice(startIndex,endIndex);
+        window.alert(curr);
+        var jason = JSON.parse(curr);
+        map.set(jason.description, jason.timeStep);
+        startIndex = endIndex + 1;
+        endIndex =nextComma(Data.slice(endIndex,0));
+    }
+    curr = Data.slice(startIndex,endIndex);
+    window.alert(curr);
+    jason = JSON.parse(curr);
+    map.set(jason.description, jason.timeStep);
+
+    const iterator1 = map.values();
+    window.alert(iterator1.next().value);
+    window.alert(iterator1.next().value);
+
+}
 
 $(document).ready(function(){
     $("form#Form").on('submit', function(e){
@@ -140,15 +180,12 @@ $(document).ready(function(){
         var anomaly = document.getElementById("detect").files[0];
         formData.append("model", model);
         formData.append("anomaly", anomaly);
-        console.log(model);
-        console.log(anomaly);
-        console.log(formData);
         $.ajax({
             type: 'POST',
             url: "/api/detect?model_type=regression",
             data: formData,  //JSON.stringify({"model":model, "anoamly":anomaly}),
             success: function(data) { console.log("success");
-                console.log(data); },
+                console.log(data); Data = data; setUpResView() },
             error: function(e) { console.log(e); },
             contentType: false,
             processData: false,

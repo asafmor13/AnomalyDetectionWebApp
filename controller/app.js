@@ -50,7 +50,7 @@ router.post('/api/detect', function(req, res, next){
     }
 
     //extract the files data
-    console.log(req.files)
+    //console.log(req.files)
     let model = req.files.model;
     let anomaly = req.files.anomaly;
     //convert them to strings.
