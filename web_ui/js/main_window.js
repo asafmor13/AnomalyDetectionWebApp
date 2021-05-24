@@ -1,5 +1,6 @@
 var learnFile;
 var detectionFile;
+var firstTime;
 document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
     const dropZoneElement = inputElement.closest(".drop-zone");
 
@@ -38,7 +39,7 @@ document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
 
     detect.addEventListener("change", event => {
         const files = event.target.files;
-        uploadFile(files);
+        //uploadFile(files);
     });
 });
 
@@ -87,10 +88,25 @@ function updateThumbnail(dropZoneElement, file) {
 }
 
 function setForm() {
+    // setFiles();
+    // let action = setAction();
 
-    setFiles();
-    setAction();
-    return validityCheck();
+    window.alert("set form :)");
+    if (true || validityCheck()) {
+        // do the actual query...
+
+        $.ajax({
+            type: 'post',
+            url: '/ajax',
+            data: formData,
+            dataType: 'text'
+        })
+            .done(function(data){
+                window.alert(data.data);
+            });
+    }
+
+    return false;
 }
 
 function setFiles() {
@@ -110,9 +126,32 @@ function validityCheck() {
 
 function setAction() {
     let choice=document.getElementById("detectors").value;
-    document.getElementById("Form").action="/api/detect?model_type=" + choice;
-
+    let action="/api/detect?model_type=" + choice;
+    // document.getElementById("Form").action=action
+    return action
 }
 
 
-
+$(document).ready(function(){
+    $("form#Form").on('submit', function(e){
+        e.preventDefault();
+        var formData = new FormData();
+        var model = document.getElementById("learn").files[0];
+        var anomaly = document.getElementById("detect").files[0];
+        formData.append("model", model);
+        formData.append("anomaly", anomaly);
+        console.log(model);
+        console.log(anomaly);
+        console.log(formData);
+        $.ajax({
+            type: 'POST',
+            url: "/api/detect?model_type=regression",
+            data: formData,  //JSON.stringify({"model":model, "anoamly":anomaly}),
+            success: function(data) { console.log("success");
+                console.log(data); },
+            error: function(e) { console.log(e); },
+            contentType: false,
+            processData: false,
+        })
+    });
+});

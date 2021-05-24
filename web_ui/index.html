@@ -16,6 +16,8 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
     <script src="/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+
 
 </head>
 <body>
@@ -39,9 +41,9 @@
         </div>
     </div>
 </div>
+<form name="myForm" method="POST" id="Form" enctype="multipart/form-data">
 <div class="service-content" id="services">
-    <form name="myForm" action="/api/detect?model_type=" onsubmit="return setForm()" method="POST" id="Form"
-    enctype="multipart/form-data">
+
 
     <table align="center"> <tr> <td>
         <div class="container">
@@ -97,7 +99,7 @@
 
 
 </td> </tr> </table>
-    </form>
+
 
 </div>
 
@@ -107,12 +109,18 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <div class="wrapper">
+                    <form action="GET">
+
+
+
                     <section id="first-tab-group" class="tabgroup">
                         <div id="tab1">
                             <img src="img/1st-tab.jpg" alt="">
                             <p>blablabla some text, maybe explain res</p>
                         </div>
                     </section>
+                    </form>
+
                     <ul class="tabs clearfix" data-tabgroup="first-tab-group">
                         <li><a href="#tab1" class="active">the results</a></li>
                     </ul>
@@ -121,7 +129,7 @@
         </div>
     </div>
 </div>
-
+</form>
 <footer>
     <div class="container">
         <div class="row">
