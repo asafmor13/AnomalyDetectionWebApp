@@ -130,47 +130,95 @@ function setAction() {
     // document.getElementById("Form").action=action
     return action
 }
- function nextComma(string){
-    window.alert("here");
-    let size = string.length;
-    let firstTime = 0;
-    let i = 0;
-    for (; i < size ; i++) {
-        if (string[i] == ',') {
-            if (firstTime === 1) {
-                return i;
-            } else {
-                firstTime = 1;
-            }
+
+function countRes(file) {
+    let count=0;
+    let i=0;
+    while(file[i] !== undefined) {
+        if((count !== 0) && (file[i].description === file[count-1].description)) {
+        } else {
+            count++;
+        }
+        i++;
+    }
+    return count;
+}
+
+function createArr(size) {
+    var x = new Array(size);
+    for (var i = 0; i < size; i++) {
+        x[i] = [];
+    }
+    return x;
+}
+
+function jasonToArr(file){
+    var size = countRes(file);
+    var arr=createArr(size);
+    //var Jason=JSON.parse(file);
+    for (var i=0; i<size;i++) {
+        if ((i!==0) && (file[i].description === file[i-1].description)) {
+            i--;
+            arr[i].push(file[i].timeStep);
+        } else {
+            arr[i].push(file[i].description);
+            arr[i].push(file[i].timeStep);
         }
     }
-    return -1;
+    return arr;
+}
+
+function clickButton() {
+    window.alert("clicked");
+    var div=document.getElementsByName("def");
+    div.visibility="hidden";
+    div=document.getElementsByName("res");
+    div.visibility="visible";
+}
+
+function addButton(arr,i) {
+    var d= i+1;
+    var list_tag = document.getElementById('list');
+    var li_tag = document.createElement('li');
+    li_tag.id = "tab" + d;
+    var a = document.createElement('a');
+    a.href = '#tab'+d;
+    a.innerText = arr[0];
+    a.id="a_"+d;
+    //a.onclick=clickButton();
+    list_tag.appendChild(li_tag);
+    li_tag.appendChild(a);
+}
+
+function setUpJs(){
+    $('.tabgroup > div').hide();
+    $('.tabgroup > div:first-of-type').show();
+    $('.tabs a').click(function(e){
+        e.preventDefault();
+        var $this = $(this),
+            tabgroup = '#'+$this.parents('.tabs').data('tabgroup'),
+            others = $this.closest('li').siblings().children('a'),
+            target = $this.attr('href');
+        others.removeClass('active');
+        $this.addClass('active');
+        $(tabgroup).children('div').hide();
+        $(target).show();
+    })
 }
 
 function setUpResView() {
-    //window.scroll(0, 1200);
+    window.scroll(0, 1200);
+    var jason = JSON.parse(Data);
+    var arr=jasonToArr(jason);
 
-    var map = new Map();
-    var endIndex =nextComma(Data);
-    var startIndex = 1;
-    while (endIndex != -1) {
-        var curr = Data.slice(startIndex,endIndex);
-        window.alert(curr);
-        var jason = JSON.parse(curr);
-        map.set(jason.description, jason.timeStep);
-        startIndex = endIndex + 1;
-        endIndex =nextComma(Data.slice(endIndex,0));
+    for(var i = 0; i < arr.length ; i++){
+        addButton(arr[i], i);
     }
-    curr = Data.slice(startIndex,endIndex);
-    window.alert(curr);
-    jason = JSON.parse(curr);
-    map.set(jason.description, jason.timeStep);
-
-    const iterator1 = map.values();
-    window.alert(iterator1.next().value);
-    window.alert(iterator1.next().value);
+    setUpJs();
 
 }
+
+
 
 $(document).ready(function(){
     $("form#Form").on('submit', function(e){
