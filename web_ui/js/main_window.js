@@ -168,26 +168,33 @@ function jasonToArr(file){
     return arr;
 }
 
-function clickButton() {
-    window.alert("clicked");
-    var div=document.getElementsByName("def");
-    div.visibility="hidden";
-    div=document.getElementsByName("res");
-    div.visibility="visible";
-}
 
 function addButton(arr,i) {
     var d= i+1;
     var list_tag = document.getElementById('list');
     var li_tag = document.createElement('li');
-    li_tag.id = "tab" + d;
+    li_tag.id = "tab1";
     var a = document.createElement('a');
     a.href = '#tab'+d;
     a.innerText = arr[0];
     a.id="a_"+d;
-    //a.onclick=clickButton();
     list_tag.appendChild(li_tag);
     li_tag.appendChild(a);
+    var expStr="timeStep of anomalies : ";
+    for (var j=1;j<arr.length;j++){
+        expStr=expStr.concat(arr[j]);
+        expStr=expStr.concat(",");
+    }
+    let newDiv = document.createElement('div');
+    newDiv.id="tab"+d;
+    let img= document.createElement('img');
+    img.src="./img/anomalyGraph.jpg"
+    let newP = document.createElement('p');
+    newP.id="resTs"+d;
+    newP.innerHTML=expStr.slice(0,-1);
+    document.getElementById("first-tab-group").appendChild(newDiv);
+    newDiv.appendChild(img);
+    newDiv.appendChild(newP);
 }
 
 function setUpJs(){
