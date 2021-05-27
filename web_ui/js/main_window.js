@@ -220,7 +220,6 @@ function delLastButtons() {
     while (list.childNodes[0]) {
       listElement.removeChild(list.childNodes[0]);
     }
-    window.alert("done loop");
 }
 
 function setUpResView() {
