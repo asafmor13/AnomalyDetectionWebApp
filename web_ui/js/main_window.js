@@ -180,7 +180,7 @@ function addButton(arr,i) {
     a.id="a_"+d;
     list_tag.appendChild(li_tag);
     li_tag.appendChild(a);
-    var expStr="timeStep of anomalies : ";
+    var expStr="";
     for (var j=1;j<arr.length;j++){
         expStr=expStr.concat(arr[j]);
         expStr=expStr.concat(",");
@@ -189,6 +189,7 @@ function addButton(arr,i) {
     newDiv.id="tab"+d;
     let img= document.createElement('img');
     img.src="./img/anomalyGraph.jpg"
+    img.id="img"+d;
     let newP = document.createElement('p');
     newP.id="resTs"+d;
     newP.innerHTML=expStr.slice(0,-1);
@@ -213,16 +214,24 @@ function setUpJs(){
     })
 }
 
+function delLastButtons() {
+    var listElement = document.getElementById('list');
+    var element=list.childNodes[0];
+    while (list.childNodes[0]) {
+      listElement.removeChild(list.childNodes[0]);
+    }
+    window.alert("done loop");
+}
+
 function setUpResView() {
     window.scroll(0, 1200);
     var jason = JSON.parse(Data);
     var arr=jasonToArr(jason);
-
+    delLastButtons();
     for(var i = 0; i < arr.length ; i++){
         addButton(arr[i], i);
     }
     setUpJs();
-
 }
 
 
