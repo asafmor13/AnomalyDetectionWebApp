@@ -49,6 +49,6 @@ The page that will show after ruuning:
 ![WhatsApp Image 2021-05-23 at 15 30 54](https://user-images.githubusercontent.com/62257681/119260715-ae83bb00-bbdc-11eb-91eb-e0ba1f860af3.jpeg)
 
 # UML Chart:
-Press [link](https://github.com/asafmor13/anomalydetectionwebapp/blob/master/UML%20webapp.png) to get the UML of the main classes.
+Press [here](https://github.com/asafmor13/anomalydetectionwebapp/blob/master/UML%20webapp.png) to get the UML of the main classes.
 
 # Explanation Video:
