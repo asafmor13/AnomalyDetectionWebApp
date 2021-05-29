@@ -119,10 +119,6 @@ function validityCheck(file1, file2) {
     if (file1!=undefined && file1.name.endsWith(".csv") &&
         file2!=undefined && file2.name.endsWith(".csv"))
         {
-          //  window.alert(file1);
-          //  window.alert(file1.name);
-          //  window.alert(file2);
-          //  window.alert(file2.name);
             return true;
         }
     return false;
@@ -252,12 +248,14 @@ $(document).ready(function(){
             window.alert("one of the files(or more) are invalid, please resubmit");
             return false;
         }
+        let action = setAction();
+
 
         formData.append("model", model);
         formData.append("anomaly", anomaly);
         $.ajax({
             type: 'POST',
-            url: "/api/detect?model_type=regression",
+            url: action,
             data: formData,  //JSON.stringify({"model":model, "anoamly":anomaly}),
             success: function(data) { console.log("success");
                 console.log(data); Data = data ; setUpResView() },
