@@ -1,10 +1,9 @@
 const express = require('express')
-const fs = require ('fs')
 const fileUpload = require('express-fileupload')
 const bodyParser = require('body-parser');
 const app = express();
-const path = require('path');
 const detector = require('../Model/MainModel');
+let router = express.Router();
 const port = 8080;
 
 //define the app utilities.
@@ -12,6 +11,7 @@ app.use(fileUpload());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("./web_ui"));
+app.use('/', router)
 
 //get requset.
  app.get("/", (req,res)=> {
@@ -19,7 +19,7 @@ app.use(express.static("./web_ui"));
 });
 
 //initialize a router.
-let router = express.Router();
+
 
 //post request.
 router.post('/api/detect', function(req, res, next){
@@ -36,7 +36,6 @@ router.post('/api/detect', function(req, res, next){
     //extract the files data
     let model = req.files.model;
     let anomaly = req.files.anomaly;
-
     //convert them to strings.
     let learnFile = model.data.toString();
     let anomalyFile = anomaly.data.toString();
@@ -52,6 +51,5 @@ router.post('/api/detect', function(req, res, next){
     }
 });
 
-app.use('/', router)
 app.listen(port, () => console.log('listening on port 8080'));
 
