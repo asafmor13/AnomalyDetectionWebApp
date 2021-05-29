@@ -134,9 +134,10 @@ function setAction() {
 function countRes(file) {
     let count=0;
     let i=0;
+    var a=[];
     while(file[i] !== undefined) {
-        if((count !== 0) && (file[i].description === file[count-1].description)) {
-        } else {
+        if (!(a.includes(file[i].description))) {
+            a.push(file[i].description);
             count++;
         }
         i++;
@@ -155,19 +156,28 @@ function createArr(size) {
 function jasonToArr(file){
     var size = countRes(file);
     var arr=createArr(size);
-    //var Jason=JSON.parse(file);
-    for (var i=0; i<size;i++) {
-        if ((i!==0) && (file[i].description === file[i-1].description)) {
-            i--;
-            arr[i].push(file[i].timeStep);
-        } else {
-            arr[i].push(file[i].description);
-            arr[i].push(file[i].timeStep);
+    window.alert("size ="+ size);
+    var j=0
+    var i = -1;
+    while (file[j]) {
+        //window.alert("description = " + file[j].description);
+        if ((i !== -1) && (file[j].description === (arr[i])[0])) {
+            //window.alert("ts = " + file[j].timeStep);
+            arr[i].push(file[j].timeStep);
+        } else { // if its a new description to add
+            i++;
+            arr[i].push(file[j].description);
+            arr[i].push(file[j].timeStep);
         }
+        j++;
     }
+
+    for (var i=0; i<size; i++) {
+        window.alert(arr[i]);
+    }
+
     return arr;
 }
-
 
 function addButton(arr,i) {
     var d= i+1;
