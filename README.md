@@ -1,7 +1,7 @@
 # AnomalyDetectionWebApp
 **Preview from AnomalyDetectionWebApp**
 
-![WhatsApp Image 2021-05-23 at 15 30 36](https://user-images.githubusercontent.com/62257681/119260711-aa579d80-bbdc-11eb-8326-011a3e69e604.jpeg)
+<img width="943" alt="webapp" src="https://user-images.githubusercontent.com/62257681/120081099-66750480-c0c4-11eb-99a2-bdfa7159cb37.png">
 
 # Brief explanation of the project:
 
@@ -49,7 +49,7 @@ The page that will show after ruuning:
 ![WhatsApp Image 2021-05-23 at 15 30 54](https://user-images.githubusercontent.com/62257681/119260715-ae83bb00-bbdc-11eb-91eb-e0ba1f860af3.jpeg)
 
 # UML Chart:
-Press [here](https://github.com/asafmor13/anomalydetectionwebapp/blob/master/UML%20webapp.png) to get the UML of the main classes.
+Press [here](https://github.com/asafmor13/anomalydetectionwebapp/blob/master/UML.jpeg) to get the UML of the main classes.
 
 # Explanation Video:
 Press [here](https://www.youtube.com/watch?v=p2naQ8PtQY8&ab_channel=%D7%90%D7%A1%D7%A3%D7%9E%D7%95%D7%A8) to watch the explanation video.
