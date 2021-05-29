@@ -14,6 +14,7 @@ app.use(express.urlencoded({
     extended: false
 }))
 app.use(express.static("./web_ui"));
+console.log('Current directory: ' + process.cwd());
 
  app.get("/", (req,res)=> {
      res.sendFile('./index.html');
@@ -48,7 +49,10 @@ router.post('/api/detect', function(req, res, next){
         res.status(400).send("unsupported model type")
         return
     }
-
+    if (!req.files.model || !req.files.anomaly) {
+        res.status(400).send("unsupported model type")
+        return
+    }
     //extract the files data
     //console.log(req.files)
     let model = req.files.model;
