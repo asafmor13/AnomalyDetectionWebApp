@@ -52,3 +52,4 @@ The page that will show after ruuning:
 Press [here](https://github.com/asafmor13/anomalydetectionwebapp/blob/master/UML%20webapp.png) to get the UML of the main classes.
 
 # Explanation Video:
+Press [here](https://www.youtube.com/watch?v=p2naQ8PtQY8&ab_channel=%D7%90%D7%A1%D7%A3%D7%9E%D7%95%D7%A8) to watch the explanation video.
