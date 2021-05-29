@@ -115,10 +115,14 @@ function setFiles() {
     document.getElementById("detect").input=detectionFile;
 }
 
-function validityCheck() {
-    if (learnFile!=undefined && learnFile.name.endsWith(".csv") &&
-        detectionFile!=undefined && detectionFile.name.endsWith(".csv"))
+function validityCheck(file1, file2) {
+    if (file1!=undefined && file1.name.endsWith(".csv") &&
+        file2!=undefined && file2.name.endsWith(".csv"))
         {
+          //  window.alert(file1);
+          //  window.alert(file1.name);
+          //  window.alert(file2);
+          //  window.alert(file2.name);
             return true;
         }
     return false;
@@ -156,7 +160,6 @@ function createArr(size) {
 function jasonToArr(file){
     var size = countRes(file);
     var arr=createArr(size);
-    window.alert("size ="+ size);
     var j=0
     var i = -1;
     while (file[j]) {
@@ -171,11 +174,6 @@ function jasonToArr(file){
         }
         j++;
     }
-
-    for (var i=0; i<size; i++) {
-        window.alert(arr[i]);
-    }
-
     return arr;
 }
 
@@ -244,13 +242,17 @@ function setUpResView() {
 }
 
 
-
 $(document).ready(function(){
     $("form#Form").on('submit', function(e){
         e.preventDefault();
         var formData = new FormData();
         var model = document.getElementById("learn").files[0];
         var anomaly = document.getElementById("detect").files[0];
+        if ((!(validityCheck(model,anomaly)))) {
+            window.alert("one of the files(or more) are invalid, please resubmit");
+            return false;
+        }
+
         formData.append("model", model);
         formData.append("anomaly", anomaly);
         $.ajax({
@@ -258,8 +260,9 @@ $(document).ready(function(){
             url: "/api/detect?model_type=regression",
             data: formData,  //JSON.stringify({"model":model, "anoamly":anomaly}),
             success: function(data) { console.log("success");
-                console.log(data); Data = data; setUpResView() },
-            error: function(e) { console.log(e); },
+                console.log(data); Data = data ; setUpResView() },
+            error: function(e) { console.log(e);
+            },
             contentType: false,
             processData: false,
         })
