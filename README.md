@@ -46,7 +46,7 @@ Use the command: node expServer.js . After that, the server will wait for the de
 Now, you can open a page by the adress 'localhost:8080' or send HTTP POST-command to the 'localhost:8080' adress.
 
 The page that will show after ruuning:
-![WhatsApp Image 2021-05-23 at 15 30 54](https://user-images.githubusercontent.com/62257681/119260715-ae83bb00-bbdc-11eb-91eb-e0ba1f860af3.jpeg)
+<img width="942" alt="webappwork" src="https://user-images.githubusercontent.com/62257681/120081378-0a12e480-c0c6-11eb-8bca-695bc285a248.png">
 
 # UML Chart:
 Press [here](https://github.com/asafmor13/anomalydetectionwebapp/blob/master/UML.jpeg) to get the UML of the main classes.
