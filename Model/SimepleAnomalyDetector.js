@@ -52,7 +52,6 @@ class SimpleAnomalyDetector {
         //getting the colNames of the timeSeries into array.
         let colNames = timeSeries.colNames;
         let table = timeSeries.table;
-        let dontOverDo = [];
 
 
         //number of columns(features) at the timeSeries.
@@ -61,28 +60,18 @@ class SimpleAnomalyDetector {
 
         for(let i = 0; i < size; i++) {
             let feature1 = colNames[i];
-            let found = dontOverDo.find(elm => elm === feature1);
-            if(dontOverDo.length > 0 && found === feature1) {
-                continue;
-            }
             let maxCore = 0
             let maxIndex = 0;
 
             for(let j = i + 1; j < size; j++) {
                 let feature2 = colNames[j];
                 let cor = Math.abs(util.pearson(table.get(feature1), table.get(feature2),valueSize));
-                found = dontOverDo.find(elm => elm === feature2);
-                if(found !== undefined) {
-                    continue;
-                }
                 if(cor > maxCore) {
                     maxCore = cor;
                     maxIndex = j;
                 }
             }
             let fMostCore = colNames[maxIndex];
-            dontOverDo.push(feature1);
-            dontOverDo.push(fMostCore);
             this.learnHelper(table, maxCore, feature1, fMostCore, valueSize);
         }
     }

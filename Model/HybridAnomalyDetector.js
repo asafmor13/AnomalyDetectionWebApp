@@ -31,6 +31,7 @@ class HybridAnomalyDetector extends simple.SimpleAnomalyDetector {
 
         //else,if corr > 0.5 => using MinCircle.
         if(maxCore > 0.5 && maxCore < this.threshold) {
+
             //creates circle.
             const circle = this.findCircle(table.get(feature1), table.get(fMostCore), size);
             //creates corr feature.
