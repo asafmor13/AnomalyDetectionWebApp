@@ -37,8 +37,10 @@ The View folder implements the code for HTML page that will be presented to the 
 3) Open the command prompt, and in the project's folder install: express-fileupload
 4) [link](https://nodejs.org/en/download/) to install node.js
 5) install the library of smallest-enclosing-circle with the command: npm install smallest-enclosing-circle
-6) install 'html tablify'
-
+6) install 'nodemon'
+```bash
+npm install -g nodemon
+```
 # Installation
 1. Download zip and extract anomalydetectionwebapp-master
 2. open the directory from the command line
