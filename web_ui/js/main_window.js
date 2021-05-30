@@ -87,34 +87,7 @@ function updateThumbnail(dropZoneElement, file) {
     };
 }
 
-function setForm() {
-    // setFiles();
-    // let action = setAction();
-
-    window.alert("set form :)");
-    if (true || validityCheck()) {
-        // do the actual query...
-
-        $.ajax({
-            type: 'post',
-            url: '/ajax',
-            data: formData,
-            dataType: 'text'
-        })
-            .done(function(data){
-                window.alert(data.data);
-            });
-    }
-
-    return false;
-}
-
-function setFiles() {
-
-    document.getElementById("learn").input=learnFile;
-    document.getElementById("detect").input=detectionFile;
-}
-
+// check validity of files
 function validityCheck(file1, file2) {
     if (file1!=undefined && file1.name.endsWith(".csv") &&
         file2!=undefined && file2.name.endsWith(".csv"))
@@ -124,6 +97,7 @@ function validityCheck(file1, file2) {
     return false;
 }
 
+// set the action with query
 function setAction() {
     let choice=document.getElementById("detectors").value;
     let action="/api/detect?model_type=" + choice;
@@ -131,6 +105,7 @@ function setAction() {
     return action
 }
 
+// count num of different descriptions
 function countRes(file) {
     let count=0;
     let i=0;
@@ -145,6 +120,7 @@ function countRes(file) {
     return count;
 }
 
+// create an empty data structure
 function createArr(size) {
     var x = new Array(size);
     for (var i = 0; i < size; i++) {
@@ -153,6 +129,7 @@ function createArr(size) {
     return x;
 }
 
+// parse result jason into data structure
 function jasonToArr(file){
     var size = countRes(file);
     var arr=createArr(size);
@@ -173,6 +150,7 @@ function jasonToArr(file){
     return arr;
 }
 
+// add new buttons according to detection results
 function addButton(arr,i) {
     var d= i+1;
     var list_tag = document.getElementById('list');
@@ -202,6 +180,7 @@ function addButton(arr,i) {
     newDiv.appendChild(newP);
 }
 
+//set new buttons according to detection results
 function setUpJs(){
     $('.tabgroup > div').hide();
     $('.tabgroup > div:first-of-type').show();
@@ -218,6 +197,7 @@ function setUpJs(){
     })
 }
 
+// delete created buttons from last session of anomaly detection
 function delLastButtons() {
     var listElement = document.getElementById('list');
     var element=list.childNodes[0];
@@ -226,6 +206,7 @@ function delLastButtons() {
     }
 }
 
+// show results in webapp, and move to the results section
 function setUpResView() {
     window.scroll(0, 1200);
     var jason = JSON.parse(Data);
@@ -238,7 +219,7 @@ function setUpResView() {
     setUpJs();
 }
 
-
+// set up ajax post request
 $(document).ready(function(){
     $("form#Form").on('submit', function(e){
         e.preventDefault();
