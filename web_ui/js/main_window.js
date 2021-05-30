@@ -233,6 +233,7 @@ function setUpResView() {
     delLastButtons();
     for(var i = 0; i < arr.length ; i++){
         addButton(arr[i], i);
+      //  addButton("ASAf", i);
     }
     setUpJs();
 }
@@ -245,7 +246,7 @@ $(document).ready(function(){
         var model = document.getElementById("learn").files[0];
         var anomaly = document.getElementById("detect").files[0];
         if ((!(validityCheck(model,anomaly)))) {
-            window.alert("one of the files(or more) are invalid, please resubmit");
+            window.alert("unsupported file type");
             return false;
         }
         let action = setAction();
