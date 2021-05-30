@@ -1,4 +1,6 @@
-//Point class.
+/**
+ * Point class.
+ */
 class Point {
     x;
     y;
@@ -9,7 +11,9 @@ class Point {
     }
 }
 
-//line class.
+/**
+ * Line class.
+ */
 class Line {
     a;
     b;
@@ -24,7 +28,12 @@ class Line {
 
 /** Utils class, used by anomaly-detectors. */
 class Utils {
-    //avg
+    /**
+     * This method finds the avg of given float array..
+     * @param x     -   the array.
+     * @param size  -   its size.
+     * @returns {number}    -   the avg.
+     */
     avg(x = [], size) {
         let sum = 0;
         for (let i = 0; i < size; i++) {
@@ -33,7 +42,12 @@ class Utils {
         return sum / size;
     }
 
-    //variance
+    /**
+     * This method returns the variance of given float array.
+     * @param x     - an array.
+     * @param size  - its size.
+     * @returns {number}    -   the variance.
+     */
     variance(x = [], size) {
         let av = this.avg(x, size);
         let sum = 0;
@@ -43,7 +57,13 @@ class Utils {
         return (sum / size) - (av * av);
     }
 
-    //covariance.
+    /**
+     * This method finds the covariance of two float arrays.
+     * @param x     -   1st array.
+     * @param y     -   2st array.
+     * @param size  -   their size.
+     * @returns {number}    -   the covariance.
+     */
     cov(x, y, size) {
         let sum = 0;
         for (let i = 0; i < size; i++) {
@@ -53,12 +73,24 @@ class Utils {
         return sum - this.avg(x, size) * this.avg(y, size);
     }
 
-    //pearson.
+    /**
+     * This method finds the pearson of 2 float arrays.
+     * @param x     -   1st array.
+     * @param y     -   2st array.
+     * @param size  -   their size.
+     * @returns {number}    -   the pearson.
+     */
     pearson(x = [], y = [], size) {
         return this.cov(x, y, size) / (Math.sqrt(this.variance(x, size)) * Math.sqrt(this.variance(y, size)));
     }
 
-    //linear regression.
+    /**
+     * This method finds the linear reggression line or 2 float arrays.
+     * @param x     -   1st array.
+     * @param y     -   2st array.
+     * @param size  -   their size.
+     * @returns {Line}  -   the lin_reg Line.
+     */
     linear_reg(x =[], y = [], size) {
         if(!this.variance(x,size)) {
             return new Line(0,0);
@@ -68,7 +100,12 @@ class Utils {
         return new Line(a, b);
     }
 
-    //dev.
+    /**
+     * This method find the distance of a point from a line.
+     * @param point     -   point.
+     * @param line      -   line.
+     * @returns {number}    -   the distance.
+     */
     dev(point= {Point}, line = {Line}) {
         let x = point.y - line.f(point.x);
         if (x < 0)

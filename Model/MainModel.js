@@ -6,9 +6,9 @@ const hybrid = require('../Model/HybridAnomalyDetector');
 
 /**
  * This method activaes the SimepleAnomalyDetector(regression).
- * @param trainFileData
- * @param testFileData
- * @returns {[]}
+ * @param trainFileData  -  train file data as string.
+ * @param testFileData   - test file data as string.
+ * @returns {[]}          - array of anomaly reports.
  */
 function simpleActivator(trainFileData, testFileData) {
     //creating time Series from the train file data.
@@ -22,10 +22,15 @@ function simpleActivator(trainFileData, testFileData) {
     let timeSeries2 = new ts.TimeSeries(testFileData);
     //detect the anomalies and return the result as array of Anomaly-Reports.
     return simpleAnomaly.detect(timeSeries2);
-     //parse it as JSON by feature,so it will be easier to work with.
-    //return the answer.
 }
 
+
+/**
+ * This method activates the hybrid AnomalyDetector.
+ * @param trainFileData  -  train file data as string.
+ * @param testFileData   - test file data as string.
+ * @returns {[]}          - array of anomaly reports.
+ */
 function hybridActivator(trainFileData, testFileData) {
     //creating time Series from the train file data.
     let timeSeries = new ts.TimeSeries(trainFileData);
