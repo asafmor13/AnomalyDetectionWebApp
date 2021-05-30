@@ -39,6 +39,18 @@ The View folder implements the code for HTML page that will be presented to the 
 5) install the library of smallest-enclosing-circle with the command: npm install smallest-enclosing-circle
 6) install 'html tablify'
 
+# Installation
+1.Download zip and extract anomalydetectionwebapp-master and open the directory from the command line
+2. Install dependencies
+```bash
+ $ npm install
+```
+3.Run program 
+```bash
+  $ npm start
+```
+
+
 
 # Running 
 Open the command-promp and get in the project directory. Then, get in the controller directory.
