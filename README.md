@@ -40,13 +40,13 @@ The View folder implements the code for HTML page that will be presented to the 
 6) install 'html tablify'
 
 # Installation
-1. Download zip and extract anomalydetectionwebapp-master and open the directory from the command line
-
-2. Install dependencies
+1. Download zip and extract anomalydetectionwebapp-master
+2. open the directory from the command line
+3. Install dependencies
 ```bash
  $ npm install
 ```
-3. Run program 
+4. Run program 
 ```bash
   $ npm start
 ```
