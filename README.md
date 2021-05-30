@@ -40,12 +40,13 @@ The View folder implements the code for HTML page that will be presented to the 
 6) install 'html tablify'
 
 # Installation
-1.Download zip and extract anomalydetectionwebapp-master and open the directory from the command line
+1. Download zip and extract anomalydetectionwebapp-master and open the directory from the command line
+
 2. Install dependencies
 ```bash
  $ npm install
 ```
-3.Run program 
+3. Run program 
 ```bash
   $ npm start
 ```
@@ -57,7 +58,6 @@ Open the command-promp and get in the project directory. Then, get in the contro
 Use the command: node expServer.js . After that, the server will wait for the detection files.
 Now, you can open a page by the adress 'localhost:8080' or send HTTP POST-command to the 'localhost:8080' adress.
 
-The page that will show after ruuning:
 <img width="942" alt="webappwork" src="https://user-images.githubusercontent.com/62257681/120081378-0a12e480-c0c6-11eb-8bca-695bc285a248.png">
 
 # UML Chart:
