@@ -17,22 +17,38 @@ class SimpleAnomalyDetector {
 
     /** methods */
 
-    //cauculation of the threshold.
+    /**
+     * This method finds the threshold, aka the max distance from the reg line.
+     * @param floatArr1 -   feature1 value list.
+     * @param floatArr2 -   feature 2 value list.
+     * @param lineReg   -   their linear reg line.
+     * @returns {number} -  the threshold.
+     */
     findThreshold(floatArr1 = [], floatArr2 = [], lineReg) {
         let max = 0;
+        //get the size of the values array.
         let size = floatArr1.length;
-        for(let i = 0; i < size; i++) {
 
+        //getting the max distance from the reg line(threshold).
+        for(let i = 0; i < size; i++) {
             let p = new utils.Point(floatArr1[i], floatArr2[i]);
             let distance = util.dev(p, lineReg);
             if(distance > max) {
                 max = distance;
             }
         }
+        //returns the threshold.
         return max;
     }
 
-    //if the correlation is above the threshold, update and add a corrFeature.
+    /**
+     * This method creates correlated feature and adds it the "cf" array.
+     * @param table     -   the values table.
+     * @param maxCore   -   the max corrlation.
+     * @param feature1  -   feature1.
+     * @param fMostCore -   the feature that is most corr with feature 1.
+     * @param size      -   size of the values array.
+     */
     learnHelper(table, maxCore,feature1, fMostCore, size) {
         if (maxCore > this.threshold) {
             let cfs = new corrFeatures.CorrelatedFeatures();
@@ -46,8 +62,10 @@ class SimpleAnomalyDetector {
     }
 
 
-
-    //Learn the Train file.
+    /**
+     * This method learn the correlative features fro the timeseries.
+     * @param timeSeries    - csv file describes flight without anomalies.
+     */
     learnNormal(timeSeries) {
         //getting the colNames of the timeSeries into array.
         let colNames = timeSeries.colNames;
@@ -58,6 +76,7 @@ class SimpleAnomalyDetector {
         let size = colNames.length;
         let valueSize = table.get(colNames[0]).length;
 
+        //finds the most corr feature using pearson, to each feature.
         for(let i = 0; i < size; i++) {
             let feature1 = colNames[i];
             let maxCore = 0
@@ -71,19 +90,30 @@ class SimpleAnomalyDetector {
                     maxIndex = j;
                 }
             }
+            //the most corr feature to the i feature.
             let fMostCore = colNames[maxIndex];
+            //using learnHelper to add the corr feature to the cf array, if corrlation is above threshold.
             this.learnHelper(table, maxCore, feature1, fMostCore, valueSize);
         }
     }
 
-    //checking if the current point is anomaly.
+    /**
+     * This method checks if the correlation or not, in order to determain if its an anomaly.
+     * @param cf    -   a correlated feature.
+     * @param point -   point of 2 values.
+     * @returns {boolean}   -   anomalie or not.
+     */
     isAnomalous(cf, point) {
         let correlation = Math.abs(util.dev(point, cf.lin_reg));
         return correlation > cf.threshold;
     }
 
 
-    //find anomalies.
+    /**
+     * This method finds the anomalies in a given time series, and returns array of Anomaly Reports.
+     * @param timeSeries    -   a given timeseries.
+     * @returns {*[]}       -   array of anomaly reports.
+     */
     detect(timeSeries) {
         //array to store the anomaly reports.
         let reports = [];
@@ -111,11 +141,11 @@ class SimpleAnomalyDetector {
         return reports;
     }
 
-
+    //getter for the cf array.
     getNormalModel() {
         return this.cf;
     }
 }
 
-
+//export this class.
 exports.SimpleAnomalyDetector = SimpleAnomalyDetector;

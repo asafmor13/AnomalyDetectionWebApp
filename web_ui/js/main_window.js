@@ -222,7 +222,7 @@ function delLastButtons() {
     var listElement = document.getElementById('list');
     var element=list.childNodes[0];
     while (list.childNodes[0]) {
-      listElement.removeChild(list.childNodes[0]);
+        listElement.removeChild(list.childNodes[0]);
     }
 }
 
